@@ -25,7 +25,7 @@ int main (int argc, char **argv)
     * Initialises the SDL video subsystem (as well as the events subsystem).
     * Returns 0 on success or a negative error code on failure using SDL_GetError().
     */
-    if (!(game = init)) {
+    if (!(game = init())) {
         fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
         return GENERAL_ERROR;
     }
