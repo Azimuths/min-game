@@ -15,7 +15,6 @@
 int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
     bool quit = false;
-    SDL_Window *window = NULL;
     game_t *game = NULL;
     /*
     * Initialises the SDL video subsystem (as well as the events subsystem).
@@ -23,9 +22,6 @@ int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
     */
     if (!(game = init())) {
         fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
-        return GENERAL_ERROR;
-    }
-    if ((window = init_window()) == NULL) {
         return GENERAL_ERROR;
     }
     while (!quit) {
@@ -37,7 +33,8 @@ int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
                 quit = true;
         }
     }
-    SDL_DestroyWindow(window);
+    SDL_DestroyWindow(game->window);
     SDL_Quit();
+    free(game);
     return SUCCESS;
 }
