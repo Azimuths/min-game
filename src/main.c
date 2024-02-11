@@ -7,16 +7,12 @@
 
 #include <stdio.h> /* printf and fprintf */
 #include <stdbool.h> /* bool, true, and false */
-#ifdef _WIN32
-#include <SDL/SDL.h> /* Windows-specific SDL2 library */
-#else
 #include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
-#endif
 #include "defines.h" /* general defines */
 #include "init.h" /* init functions */
 #include "game.h" /* game struct */
 
-int main (int argc, char **argv)
+int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
     bool quit = false;
     SDL_Window *window = NULL;
