@@ -10,15 +10,7 @@
 #include "defines.h"
 #include "game.h"
 
-game_t init(void)
-{
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        return NULL;
-    }
-    return SUCCESS;
-}
-
-SDL_Window *init_window()
+SDL_Window *init_window(void)
 {
     SDL_Window *window = NULL;
     window = SDL_CreateWindow("SDL Example", /* Title of the SDL window */
@@ -32,4 +24,14 @@ SDL_Window *init_window()
       return NULL;
     }
     return window;
+}
+
+game_t *init(void)
+{
+    game_t *game = malloc(sizeof(game_t));
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        return NULL;
+    }
+    game->window = init_window();
+    return game;
 }

@@ -7,6 +7,7 @@
 
 #pragma once
 #include <SDL2/SDL.h>
+#include "game.h"
 
-int init(void);
+game_t *init(void);
 SDL_Window *init_window(void);

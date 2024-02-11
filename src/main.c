@@ -10,16 +10,18 @@
 #include <SDL2/SDL.h> /* SDL2 */
 #include "defines.h" /* general defines */
 #include "init.h" /* init functions */
+#include "game.h" /* game struct */
 
 int main (int argc, char **argv)
 {
     bool quit = false;
     SDL_Window *window = NULL;
+    game_t *game = NULL;
     /*
     * Initialises the SDL video subsystem (as well as the events subsystem).
     * Returns 0 on success or a negative error code on failure using SDL_GetError().
     */
-    if (init != SUCCESS) {
+    if (!(game = init)) {
         fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
         return GENERAL_ERROR;
     }

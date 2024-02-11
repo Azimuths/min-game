@@ -8,7 +8,7 @@
 #pragma once
 
 typedef enum card_type_e {
-    TYPE2,
+    TYPE1,
     TYPE2
 } card_type_t;
 
