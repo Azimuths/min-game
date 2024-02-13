@@ -1,15 +1,14 @@
-# Compiler
+# Compiler and flags
 CC = gcc
-
-# Compiler flags
 CFLAGS = -Wall -Wextra -Iinclude -lSDL2
 
-# Source files
-SRCS =	src/main.c \
-		src/init.c
+# Directories
+SRC_DIR = src
+OBJ_DIR = .obj
 
-# Object files
-OBJS = $(SRCS:.c=.o)
+# Source and object files
+SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 # Executable
 TARGET = game
@@ -17,14 +16,18 @@ TARGET = game
 # Default target
 all: $(TARGET)
 
-# Compile source files into object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Link object files into executable
-$(TARGET): $(OBJS)
+# Rule to build the executable
+$(TARGET): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@
 
-# Clean up object files and executable
+# Rule to build object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+debug: CFLAGS += -g -fsanitize=address
+debug: clean all
+
+# Clean rule
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
