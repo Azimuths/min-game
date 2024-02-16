@@ -12,7 +12,7 @@
 #include "init.h" /* init functions */
 #include "game.h" /* game struct */
 
-int main (int argc __attribute__((unused)), char **argv __attribute__((unused)))
+int main (int argc __attribute__((unused)), char *argv[] __attribute__((unused)))
 {
     bool quit = false;
     game_t *game = NULL;
