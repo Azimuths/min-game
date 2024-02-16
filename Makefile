@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Iinclude -lSDL2
-
+LFLAGS = -lSDL2
 # Directories
 SRC_DIR = src
 OBJ_DIR = .obj
@@ -18,7 +18,7 @@ all: $(TARGET)
 
 # Rule to build the executable
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LFLAGS)
 
 # Rule to build object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

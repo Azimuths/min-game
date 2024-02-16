@@ -5,7 +5,7 @@
 ** init file
 */
 
-#include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
+#include <SDL2/SDL.h>/* macOS- and GNU/Linux-specific */
 #include <errno.h>
 #include <stdio.h>
 #include "defines.h"
