@@ -30,10 +30,19 @@ SDL_Window *init_window(void)
 
 game_t *init(void)
 {
-    game_t *game = malloc(sizeof(game_t));
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         return NULL;
     }
+    game_t *game = malloc(sizeof(game_t));
+    if (!game)
+        return NULL;
     game->window = init_window();
+    game->renderer = SDL_CreateRenderer(game->window, -1, SDL_RENDERER_ACCELERATED);
+    if (!game->renderer) {
+        fprintf(stderr, "SDL renderer failed to initialise: %s\n", SDL_GetError());
+        return NULL;
+    }
+    game->rectangle = (SDL_Rect){0, 0, CARD_WIDTH, CARD_HEIGHT};
+    game->draw_card = draw_card;
     return game;
 }

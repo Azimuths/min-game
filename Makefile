@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -lSDL2
+CFLAGS = -Wall -Wextra -Iinclude
 LFLAGS = -lSDL2
 # Directories
 SRC_DIR = src
@@ -31,3 +31,7 @@ debug: clean all
 # Clean rule
 clean:
 	rm -rf $(OBJ_DIR)/*.o $(TARGET)
+
+re: clean all
+
+.PHONY: all clean re debug

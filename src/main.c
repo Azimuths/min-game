@@ -12,9 +12,34 @@
 #include "init.h" /* init functions */
 #include "game.h" /* game struct */
 
+
+int game_loop(game_t *game)
+{
+    double delta_time = 0;
+    unsigned int a = SDL_GetTicks();
+    unsigned int b = SDL_GetTicks();
+    bool quit = false;
+
+    while (!quit) {
+        a = SDL_GetTicks();
+        delta_time = a - b;
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT)
+                quit = true;
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+                quit = true;
+        }
+        if (delta_time > 1000 / 10) {
+            b = a;
+            game->draw_card(game, &game->cards[0], 0, 0);
+        }
+    }
+    return SUCCESS;
+}
+
 int main (int argc, char *argv[])
 {
-    bool quit = false;
     game_t *game = NULL;
     /*
     * Initialises the SDL video subsystem (as well as the events subsystem).
@@ -24,14 +49,9 @@ int main (int argc, char *argv[])
         fprintf(stderr, "SDL failed to initialise: %s\n", SDL_GetError());
         return GENERAL_ERROR;
     }
-    while (!quit) {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT)
-                quit = true;
-            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-                quit = true;
-        }
+    if (game_loop(game) != SUCCESS) {
+        fprintf(stderr, "Game loop failed\n");
+        return GENERAL_ERROR;
     }
     SDL_DestroyWindow(game->window);
     SDL_Quit();

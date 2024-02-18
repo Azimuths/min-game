@@ -6,7 +6,9 @@
 */
 
 #pragma once
+#include "game.h"
 
+typedef struct game_s game_t;
 typedef enum card_type_e {
     TYPE1,
     TYPE2
@@ -17,3 +19,5 @@ typedef struct card_s {
     char *name;
     card_type_t type;
 } card_t;
+
+void draw_card(game_t *game, card_t *card, int x, int y);
