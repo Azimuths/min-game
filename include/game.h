@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include <stdbool.h> /* bool, true, and false */
 #include <SDL2/SDL.h> /* macOS- and GNU/Linux-specific */
 #include "card.h"
 
@@ -16,5 +17,5 @@ typedef struct game_s {
     SDL_Renderer *renderer;
     card_t *cards;
     SDL_Rect rectangle;
-    void (*draw_card) (game_t *game, struct card_s *card, int x, int y);
+    void (*draw_card) (game_t *game, struct card_s *card, int x, int y, float size);
 } game_t;

@@ -5,6 +5,8 @@
 ** init file
 */
 
+#define SDL_MAIN_HANDLED
+
 #include <SDL2/SDL.h>/* macOS- and GNU/Linux-specific */
 #include <errno.h>
 #include <stdio.h>
@@ -28,6 +30,17 @@ SDL_Window *init_window(void)
     return window;
 }
 
+card_t *init_card(void)
+{
+    card_t *cards = malloc(sizeof(card_t)*MAX_CARD);
+    for(int nb_card = 0; nb_card < MAX_CARD ; nb_card++){
+        cards[nb_card].card_x = nb_card*CARD_WIDTH + CARD_SPACING;
+        cards[nb_card].card_y = 0;
+    }
+    return cards;
+}
+
+
 game_t *init(void)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -42,6 +55,7 @@ game_t *init(void)
         fprintf(stderr, "SDL renderer failed to initialise: %s\n", SDL_GetError());
         return NULL;
     }
+    game->cards = init_card();
     game->rectangle = (SDL_Rect){0, 0, CARD_WIDTH, CARD_HEIGHT};
     game->draw_card = draw_card;
     return game;
