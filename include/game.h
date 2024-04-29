@@ -17,5 +17,5 @@ typedef struct game_s {
     SDL_Renderer *renderer;
     card_t *cards;
     SDL_Rect rectangle;
-    void (*draw_card) (game_t *game, struct card_s *card, int x, int y, float size);
+    void (*draw_card) (game_t *game, card_t card, float size);
 } game_t;

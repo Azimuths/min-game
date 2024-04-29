@@ -33,9 +33,9 @@ SDL_Window *init_window(void)
 card_t *init_card(void)
 {
     card_t *cards = malloc(sizeof(card_t)*MAX_CARD);
-    for(int nb_card = 0; nb_card < MAX_CARD ; nb_card++){
-        cards[nb_card].card_x = nb_card*CARD_WIDTH + CARD_SPACING;
-        cards[nb_card].card_y = 0;
+    for(int index_card = 0; index_card < MAX_CARD ; index_card++){
+        cards[index_card].card_x = index_card*CARD_WIDTH + CARD_SPACING;
+        cards[index_card].card_y = 0;
     }
     return cards;
 }

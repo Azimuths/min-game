@@ -16,11 +16,12 @@ typedef enum card_type_e {
 
 typedef struct card_s {
     int value;
-    Sint32 card_x;
-    Sint32 card_y;
+    int card_x;
+    int card_y;
     char *name;
     card_type_t type;
 } card_t;
 
-void draw_card(game_t *game, card_t *card, int x, int y, float size);
-bool mouse_in_card(card_t card, Sint32 pos_x, Sint32 pos_y, int size);
+void draw_card(game_t *game, card_t card, float size);
+void draw_all_cards(game_t *game, int pos_x, int pos_y);
+float mouse_in_card(card_t card, int pos_x, int pos_y, int size);

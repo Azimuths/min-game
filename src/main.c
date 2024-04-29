@@ -20,8 +20,8 @@ int game_loop(game_t *game)
     double delta_time = 0;
     unsigned int a = SDL_GetTicks();
     unsigned int b = SDL_GetTicks();
-    Sint32 pos_x;
-    Sint32 pos_y;
+    int pos_x = 0;
+    int pos_y = 0;
     bool quit = false;
     while (!quit) {
         a = SDL_GetTicks();
@@ -37,16 +37,10 @@ int game_loop(game_t *game)
                 pos_y = event.motion.y;
             }
         }
-        if (delta_time > 1000 / 10) {
-            float size = 1;
-            bool mouse_card = false;
+        if (delta_time > 1000.0 / 10) {
             SDL_RenderClear(game->renderer);
             b = a;
-            for(int nb_card = 0 ; nb_card < MAX_CARD ; nb_card++){
-                mouse_card = mouse_in_card(game->cards[nb_card], pos_x, pos_y, size);
-                size = mouse_card ? 1.5 : 1;
-                game->draw_card(game, game->cards, nb_card*CARD_WIDTH, 0, size);
-            }
+            draw_all_cards(game, pos_x, pos_y);
         }
     }
     return SUCCESS;
